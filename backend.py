@@ -30,9 +30,7 @@ class User(Struct):
 # Community Object
 class Community(Struct):
     cid: int
-    ban_users: bool = False
     ban_llimit: float | None = None
-    mute_users: bool = False
     mute_llimit: float | None = None
 
 
