@@ -44,7 +44,7 @@ class Database:
             self.readers += 1
             await self.read_lock.wait_for(lambda: self.readers == 1)
 
-            string = f"Database(data={self.data}, file_loc={self.file_loc}, revert_data={self.revert_data})"
+            string = f"Database(\n\tdata={self.data},\n\tfile_loc='{self.file_loc}',\n\trevert_data={self.revert_data}\n)"
 
             self.readers -= 1
             self.read_lock.notify_all()
