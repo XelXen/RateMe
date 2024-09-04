@@ -1,0 +1,10 @@
+# Description: Configuration file for the bot (Rename config.txt to config.py)
+
+""" Telegram API : Get from https://my.telegram.org and Botfather"""
+API_ID = 0
+API_HASH = ""
+BOT_TOKEN = ""
+
+
+""" Owner """
+OWNER_ID = 6642852214
