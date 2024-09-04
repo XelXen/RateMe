@@ -1,0 +1,7 @@
+[project]
+name = "rateme"
+version = "0.0.1"
+description = "A telegram project to rate people and leave reviews on them anonymously. Community moderators can utilize this to keep the community safe."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["msgspec", "hydrogram", "tgcrypto"]
