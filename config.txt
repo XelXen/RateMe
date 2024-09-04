@@ -1,10 +1,11 @@
 # Description: Configuration file for the bot (Rename config.txt to config.py)
 
-""" Telegram API : Get from https://my.telegram.org and Botfather"""
-API_ID = 0
-API_HASH = ""
-BOT_TOKEN = ""
+""" Telegram API """
+NAME = "xyz" # Session Name
+API_ID = 0 # Get this value from my.telegram.org
+API_HASH = "abc" # Get this value from my.telegram.org
+BOT_TOKEN = "123:abc" # Get this value from @BotFather
 
-
-""" Owner """
-OWNER_ID = 0
+""" Bot Settings """
+OWNER_ID = 0 # The bot's moderator's Telegram ID
+DATABASE_FILE = "name.db" # The file to store the bot's data

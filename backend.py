@@ -25,9 +25,10 @@ class Rating(Enum):
         elif isinstance(value, Rating):
             return self == value
         return False
-    
+
     def __ne__(self, value: object) -> bool:
         return not self.__eq__(value)
+
 
 # Entity Types
 class EntityType(Enum):
@@ -41,9 +42,10 @@ class EntityType(Enum):
         elif isinstance(value, EntityType):
             return self == value
         return False
-    
+
     def __ne__(self, value: object) -> bool:
         return not self.__eq__(value)
+
 
 # Entity Object
 class Entity(Struct):
@@ -71,7 +73,7 @@ class Root(Struct):
 
 # Get Root
 def get_root(file_loc: str, load: bool = False) -> Database:
-    """ Get a database with root schema. """
+    """Get a database with root schema."""
     if not load:
         root = Root()
         with open(file_loc, "wb") as file:
@@ -82,5 +84,5 @@ def get_root(file_loc: str, load: bool = False) -> Database:
 
 # Get Rating
 def get_rating(feedbacks: Dict[int, Tuple[int, str]]) -> float:
-    """ Get the average rating from the feedbacks. """
+    """Get the average rating from the feedbacks."""
     return reduce(lambda x, y: x + y, [i for (i, _) in feedbacks.values()]) / len(feedbacks)
