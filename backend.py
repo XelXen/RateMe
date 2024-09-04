@@ -19,25 +19,51 @@ class Rating(Enum):
     FOUR = 4
     FIVE = 5
 
+    def __eq__(self, value: object) -> bool:
+        if isinstance(value, int):
+            return self.value == value
+        elif isinstance(value, Rating):
+            return self == value
+        return False
+    
+    def __ne__(self, value: object) -> bool:
+        return not self.__eq__(value)
 
-# User Object
-class User(Struct):
-    uid: int
+# Entity Types
+class EntityType(Enum):
+    USER = "user"
+    GROUP = "group"
+    CHANNEL = "channel"
+
+    def __eq__(self, value: object) -> bool:
+        if isinstance(value, str):
+            return self.value == value
+        elif isinstance(value, EntityType):
+            return self == value
+        return False
+    
+    def __ne__(self, value: object) -> bool:
+        return not self.__eq__(value)
+
+# Entity Object
+class Entity(Struct):
+    id: int
+    entity_type: str
     rating: float | None = None
     feedbacks: Dict[int, Tuple[int, str]] = {}
 
 
-# Community Object
-class Community(Struct):
-    cid: int
+# Config Object
+class Config(Struct):
     ban_llimit: float | None = None
     mute_llimit: float | None = None
+    approved: List[int] = []
 
 
 # Root Schema
 class Root(Struct):
-    users: Dict[int, User] = {}
-    communities: List[Community] = []
+    entities: Dict[int, Entity] = {}
+    configs: Dict[int, Config] = {}
 
 
 """ Functions """
