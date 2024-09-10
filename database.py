@@ -5,13 +5,12 @@
 import msgspec
 import asyncio
 import typing as t
-from os import path
 
 
 """ Schema """
 
 class Database:
-    def __init__(self, file_loc: str, load: bool = False):
+    def __init__(self, file_loc: str) -> None:
         """
         Initialize the database.
         
@@ -21,18 +20,6 @@ class Database:
 
         self.file_loc = file_loc
         self.lock = asyncio.Lock()
-
-        if load and path.exists(file_loc):
-            try:
-                with open(file_loc, "rb") as file:
-                    self.data = msgspec.json.decode(file.read())
-            except Exception as e:
-                print(
-                    f"[Database] Warning: Exception occurred while loading existing database: {e}\n[Database] Creating new database..."
-                )
-                self.data = {}
-        else:
-            self.data = {}
 
     def __str__(self) -> str:
         """
@@ -58,7 +45,8 @@ class Database:
     async def open(self) -> t.Any:
         """Aquire the lock for the database if it is not already aquired."""
         await self.lock.acquire()
-        return self.data
+        with open(self.file_loc, "rb") as file:
+            return msgspec.json.decode(file.read())
 
     async def close(self) -> None:
         """Release the lock for the database."""
