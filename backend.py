@@ -7,7 +7,8 @@ from msgspec import json
 from typing import Dict, List
 from database import Database
 from functools import reduce
-from config import ADJ_WEIGHT
+from config import ADJ_WEIGHT, DATABASE_FILE
+from os import path
 import typing as t
 
 
@@ -67,7 +68,7 @@ class RootSchema(t.TypedDict):
 
 
 # Get Root
-def get_root(file_loc: str, load: bool = False) -> Database:
+def get_root(file_loc: str = DATABASE_FILE, load: bool = False) -> Database:
     """
     Get a database with the root schema.
 
@@ -75,15 +76,17 @@ def get_root(file_loc: str, load: bool = False) -> Database:
     :param load: Load the database from the file
     :return: Database object
     """
-    if not load:
+    if not (path.exists(file_loc) and load):
         root: RootSchema = {
             "entities": {},
             "configs": {},
         }
+        print("[Backend] Creating a new root database...")
         with open(file_loc, "wb") as file:
             file.write(json.encode(root))
 
-    return Database(file_loc, load=True)
+
+    return Database(file_loc)
 
 
 # Get Entity
